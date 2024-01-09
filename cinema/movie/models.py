@@ -120,8 +120,8 @@ class Review(models.Model):
     email = models.EmailField('Email', max_length=100)
     name = models.CharField('Name', max_length=50)
     text = models.TextField('Text')
-    parent = models.ForeignKey('self', verbose_name='Parent', on_delete=models.SET_NULL, blank=True, null=True)
-    movie = models.ForeignKey(Movie, verbose_name='Movie', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', verbose_name='Parent', on_delete=models.SET_NULL, blank=True, null=True, related_name='children') #то поле, на которое мы завязываемся, указываем к какому отзыву мы привязываемся
+    movie = models.ForeignKey(Movie, verbose_name='Movie', on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):
         return f'{self.name} - {self.movie}'
